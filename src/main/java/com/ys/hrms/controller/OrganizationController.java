@@ -31,10 +31,11 @@ public class OrganizationController {
 	// Save a single organization
 	@PostMapping(value = "/saveOrganization")
 	public ResponseEntity<Object> saveOrganization(@RequestBody Organization organization) {
+		System.out.println(organization); 
 		try {
 			// Check for duplicate records based on registration number, tax ID, or website
 			// URL
-			if (organizationDao.findByRegistrationNumber(organization.getRegistrationNumber()) != null) {
+			if (organizationDao.findByRegistrationNumber(organization.getRegistrationNumber()) != null ) {
 				return new ResponseEntity<>(
 						"Duplicate Registration Number found: " + organization.getRegistrationNumber(),
 						HttpStatus.CONFLICT);
@@ -42,10 +43,6 @@ public class OrganizationController {
 			if (organizationDao.findByTaxIdentificationNumber(organization.getTaxIdentificationNumber()) != null) {
 				return new ResponseEntity<>(
 						"Duplicate Tax Identification Number found: " + organization.getTaxIdentificationNumber(),
-						HttpStatus.CONFLICT);
-			}
-			if (organizationDao.findByWebsiteUrl(organization.getWebsiteUrl()) != null) {
-				return new ResponseEntity<>("Duplicate Website URL found: " + organization.getWebsiteUrl(),
 						HttpStatus.CONFLICT);
 			}
 
@@ -132,6 +129,7 @@ public class OrganizationController {
 	// Get all organizations
 	@GetMapping(value = "/displayAllOrganizations")
 	public List<Organization> displayAllOrganizations() {
+		System.out.println(organizationDao.getAllOrganizations());
 		return organizationDao.getAllOrganizations();
 	}
 

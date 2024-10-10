@@ -24,13 +24,14 @@ public class Organization {
     private String name;
 
     @Column(nullable = false, unique = true)
+   
     private String registrationNumber;
     @Column(nullable = false, unique = true)
     private String taxIdentificationNumber;
     private String industryType;
     private String organizationType;
     private Date incorporationDate;
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String websiteUrl;
 
     @Column(columnDefinition = "TEXT")
